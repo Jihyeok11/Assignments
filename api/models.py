@@ -23,6 +23,12 @@ class Person(models.Model):
     ethnicity_source_value = models.CharField(max_length=100, null=True)
     ethnicity_source_concept_id = models.IntegerField(null=True)
 
+class Gender(models.Model):
+    id = models.AutoField(primary_key=True)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE)
+    gender_concept_id = models.IntegerField(null=True)
+    
+
 class VisitOccurence(models.Model):
     visit_occurrence_id = models.IntegerField(null=True)
     person_id = models.ForeignKey(Person, on_delete=models.CASCADE, null=False)
