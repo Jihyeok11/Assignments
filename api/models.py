@@ -1,9 +1,6 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
-
-# Create your models here.
 class Person(models.Model):
     gender_concept_id = models.IntegerField(null=True)
     year_of_birth = models.IntegerField(null=True)
@@ -23,15 +20,14 @@ class Person(models.Model):
     ethnicity_source_value = models.CharField(max_length=100, null=True)
     ethnicity_source_concept_id = models.IntegerField(null=True)
 
-class Gender(models.Model):
-    id = models.AutoField(primary_key=True)
-    person = models.ForeignKey(Person, on_delete=models.CASCADE)
-    gender_concept_id = models.IntegerField(null=True)
+# class Gender(models.Model):
+#     id = models.AutoField(primary_key=True)
+#     person = models.ForeignKey(Person, on_delete=models.CASCADE)
+#     gender_concept_id = models.IntegerField(null=True)
     
 
 class VisitOccurence(models.Model):
-    visit_occurrence_id = models.IntegerField(null=True)
-    person_id = models.ForeignKey(Person, on_delete=models.CASCADE, null=False)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, null=False)
     visit_concept_id = models.IntegerField(null=True)
     visit_start_date = models.CharField(max_length=100, null=True)
     visit_start_datetime = models.CharField(max_length=100, null=True)
@@ -49,8 +45,7 @@ class VisitOccurence(models.Model):
     preceding_visit_occurrence_id = models.IntegerField(null=True)
 
 class DrugExposure(models.Model):
-    drug_exposure_id = models.IntegerField(null=True)
-    person_id = models.ForeignKey(Person, on_delete=models.CASCADE, null=False)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, null=False)
     drug_concept_id = models.IntegerField(null=True)
     drug_exposure_start_date = models.CharField(max_length=100, null=True)
     drug_exposure_start_datetime = models.CharField(max_length=100, null=True)
@@ -74,7 +69,7 @@ class DrugExposure(models.Model):
     dose_unit_source_value = models.CharField(max_length=100, null=True)
  
 class Death(models.Model):
-    person_id = models.ForeignKey(Person, on_delete=models.CASCADE, null=False)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, null=False)
     death_date = models.CharField(max_length=100, null=True)
     death_datetime = models.CharField(max_length=100, null=True)
     death_type_concept_id = models.IntegerField(null=True)
@@ -85,8 +80,7 @@ class Death(models.Model):
 
 
 class ConditionOccurrence(models.Model):
-    condition_occurrence_id = models.IntegerField(null=True)
-    person_id = models.ForeignKey(Person, on_delete=models.CASCADE, null=False)
+    person = models.ForeignKey(Person, on_delete=models.CASCADE, null=False)
     condition_concept_id = models.IntegerField(null=True)
     condition_start_date = models.CharField(max_length=100, null=True)
     condition_start_datetime = models.CharField(max_length=100, null=True)
